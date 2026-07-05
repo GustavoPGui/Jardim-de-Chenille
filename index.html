@@ -294,6 +294,7 @@
 ========================================================= */
 const INSTAGRAM_USERNAME = "jardim_de.chenille";
 const INSTAGRAM_DM_URL = `https://www.instagram.com/direct/t/${INSTAGRAM_USERNAME}`;
+const DEFAULT_DM_MESSAGE = "Olá! Gostaria de fazer um pedido";
 
 const CATEGORIES = [
   { id: "flores",        label: "Flores" },
@@ -587,7 +588,7 @@ function renderPhotoDots(container, product, color, activeIndex, onSelect){
 const tabsEl = document.getElementById("tabs");
 const mainEl = document.getElementById("main");
 const heroPetals = document.getElementById("heroPetals");
-document.getElementById("footerWhats").href = INSTAGRAM_DM_URL;
+document.getElementById("footerWhats").href = instagramDMLink();
 
 ["#C1577A","#E8B84B","#9B7FC7","#5C7A52"].forEach(c=>{
   heroPetals.innerHTML += svgIcon("flower", c);
@@ -610,8 +611,9 @@ function buildTabs(){
   });
 }
 
-function instagramDMLink(){
-  return INSTAGRAM_DM_URL;
+function instagramDMLink(message = DEFAULT_DM_MESSAGE){
+  if(!message) return INSTAGRAM_DM_URL;
+  return `${INSTAGRAM_DM_URL}?text=${encodeURIComponent(message)}`;
 }
 
 function renderProducts(){
