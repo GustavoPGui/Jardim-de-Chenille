@@ -275,7 +275,7 @@
 <header class="hero">
   <div class="hero-eyebrow">Feito à mão, flor por flor</div>
   <h1>Jardim de Chenille</h1>
-  <p>Escolha a cor, veja o modelo e me chame no WhatsApp para fechar o pedido — sem loja virtual, sem complicação.</p>
+  <p>Escolha a cor, veja o modelo e me chame no Instagram para fechar o pedido — sem loja virtual, sem complicação.</p>
   <div class="hero-petals" id="heroPetals"></div>
 </header>
 
@@ -285,14 +285,15 @@
 
 <footer>
   Feito com carinho para o cliente • Peça sempre por
-  <a id="footerWhats" href="#">WhatsApp</a>
+  <a id="footerWhats" href="#">Instagram</a>
 </footer>
 
 <script>
 /* =========================================================
    CONFIGURAÇÃO — edite aqui
 ========================================================= */
-const WHATSAPP_NUMBER = "5500000000000"; // troque pelo seu número com DDI+DDD, ex: 5511999999999
+const INSTAGRAM_USERNAME = "18086946716114615";
+const INSTAGRAM_DM_URL = `https://www.instagram.com/direct/t/${INSTAGRAM_USERNAME}`;
 
 const CATEGORIES = [
   { id: "flores",        label: "Flores" },
@@ -586,7 +587,7 @@ function renderPhotoDots(container, product, color, activeIndex, onSelect){
 const tabsEl = document.getElementById("tabs");
 const mainEl = document.getElementById("main");
 const heroPetals = document.getElementById("heroPetals");
-document.getElementById("footerWhats").href = `https://wa.me/${WHATSAPP_NUMBER}`;
+document.getElementById("footerWhats").href = INSTAGRAM_DM_URL;
 
 ["#C1577A","#E8B84B","#9B7FC7","#5C7A52"].forEach(c=>{
   heroPetals.innerHTML += svgIcon("flower", c);
@@ -609,11 +610,8 @@ function buildTabs(){
   });
 }
 
-function whatsappLink(productName, colorName){
-  const msg = colorName
-    ? `Olá! Gostaria de fazer um pedido: ${productName} — cor ${colorName}.`
-    : `Olá! Gostaria de fazer um pedido: ${productName}.`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+function instagramDMLink(){
+  return INSTAGRAM_DM_URL;
 }
 
 function renderProducts(){
@@ -628,7 +626,7 @@ function renderProducts(){
         <h3>Quer algo só seu?</h3>
         <p>Estrela no buquê, buquê que esquenta, cachorrinho junto às flores — conte sua ideia e eu faço um orçamento personalizado.</p>
       </div>
-      <button onclick="window.open('${whatsappLink('Pedido personalizado')}', '_blank')">Falar sobre um personalizado</button>
+      <button onclick="window.open('${instagramDMLink()}', '_blank')">Falar sobre um personalizado</button>
     `;
     mainEl.appendChild(banner);
   }
@@ -703,7 +701,7 @@ function renderProducts(){
       }
 
       card.querySelector("[data-order]").addEventListener("click", ()=>{
-        window.open(whatsappLink(p.name, selectedColorName), "_blank");
+        window.open(instagramDMLink(), "_blank");
       });
 
       grid.appendChild(card);
