@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ateliê de Flores — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #EEF0E6;
+    --card: #FFFDF8;
+    --ink: #35283A;
+    --ink-soft: #6b5f70;
+    --rose: #C1577A;
+    --rose-deep: #9c3f61;
+    --leaf: #5C7A52;
+    --gold: #B8873A;
+    --line: #ddded0;
+    --radius: 18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 64px 24px 48px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(193,87,122,0.10), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(92,122,82,0.12), transparent 45%),
+      var(--bg);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--leaf);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  header.hero h1{
+    font-size:clamp(2.2rem, 5vw, 3.4rem);
+    font-weight:600;
+    color:var(--rose-deep);
+    max-width:760px;
+    margin:0 auto 16px;
+  }
+  header.hero p{
+    max-width:520px;
+    margin:0 auto;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+  .hero-petals{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:28px;
+  }
+  .hero-petals svg{ width:34px; height:34px; }
+
+  /* ---------- NAV / CATEGORY TABS ---------- */
+  nav.tabs{
+    position:sticky;
+    top:0;
+    z-index:20;
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:14px 18px;
+    background:rgba(238,240,230,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    scrollbar-width:none;
+  }
+  nav.tabs::-webkit-scrollbar{ display:none; }
+  nav.tabs button{
+    flex:0 0 auto;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink);
+    padding:9px 18px;
+    border-radius:999px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.88rem;
+    font-weight:500;
+    cursor:pointer;
+    transition:all 0.2s ease;
+    white-space:nowrap;
+  }
+  nav.tabs button:hover{ border-color:var(--rose); }
+  nav.tabs button.active{
+    background:var(--rose-deep);
+    border-color:var(--rose-deep);
+    color:#fff;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  main{ max-width:1080px; margin:0 auto; padding:36px 20px 80px; }
+  .section-title{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin: 44px 0 22px;
+  }
+  .section-title h2{
+    font-size:1.5rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .section-title span{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    flex:1;
+    padding-top:4px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px,1fr));
+    gap:22px;
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px -18px rgba(53,40,58,0.35);
+  }
+  .icon-wrap{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:linear-gradient(160deg, rgba(193,87,122,0.08), rgba(92,122,82,0.10));
+  }
+  .icon-wrap svg{ width:58%; height:58%; }
+
+  .card h3{
+    font-size:1.08rem;
+    font-weight:600;
+  }
+  .card .desc{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+  }
+  .card .price{
+    font-size:0.95rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+
+  /* swatches */
+  .swatches{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:2px;
+  }
+  .swatch{
+    width:26px; height:26px;
+    border-radius:50%;
+    border:2px solid transparent;
+    cursor:pointer;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);
+    transition:transform 0.15s ease, border-color 0.15s ease;
+  }
+  .swatch:hover{ transform:scale(1.12); }
+  .swatch.selected{ border-color:var(--ink); }
+
+  .photo-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:-4px;
+  }
+  .photo-dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    border:none;
+    padding:0;
+    background:var(--line);
+    cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .photo-dot:hover{ transform:scale(1.3); }
+  .photo-dot.active{ background:var(--rose-deep); }
+
+  .order-btn{
+    margin-top:auto;
+    border:none;
+    background:var(--leaf);
+    color:#fff;
+    padding:11px 16px;
+    border-radius:999px;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:background 0.2s ease;
+  }
+  .order-btn:hover{ background:#4a6641; }
+  .order-btn svg{ width:16px; height:16px; }
+
+  /* personalized banner */
+  .custom-banner{
+    background:linear-gradient(120deg, rgba(184,135,58,0.12), rgba(193,87,122,0.10));
+    border:1px dashed var(--gold);
+    border-radius:var(--radius);
+    padding:26px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:26px;
+  }
+  .custom-banner .txt{ flex:1; min-width:220px; }
+  .custom-banner h3{ font-size:1.15rem; margin-bottom:6px; color:var(--rose-deep); }
+  .custom-banner p{ color:var(--ink-soft); font-size:0.9rem; }
+  .custom-banner button{
+    border:none;
+    background:var(--gold);
+    color:#fff;
+    padding:12px 20px;
+    border-radius:999px;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 20px 60px;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+  }
+  footer a{ color:var(--rose-deep); font-weight:600; text-decoration:none; }
+
+  @media (max-width:480px){
+    header.hero{ padding:48px 18px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-eyebrow">Feito à mão, flor por flor</div>
+  <h1>Catálogo do Ateliê</h1>
+  <p>Escolha a cor, veja o modelo e me chame no WhatsApp para fechar o pedido — sem loja virtual, sem complicação.</p>
+  <div class="hero-petals" id="heroPetals"></div>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main id="main"></main>
+
+<footer>
+  Feito com carinho para o cliente • Peça sempre por
+  <a id="footerWhats" href="#">WhatsApp</a>
+</footer>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — edite aqui
+========================================================= */
+const WHATSAPP_NUMBER = "5500000000000"; // troque pelo seu número com DDI+DDD, ex: 5511999999999
+
+const CATEGORIES = [
+  { id: "flores",        label: "Flores" },
+  { id: "buques",         label: "Buquês" },
+  { id: "chaveiros",     label: "Chaveiros" },
+  { id: "cachorrinhos",  label: "Cachorrinhos" },
+  { id: "presilhas",     label: "Presilhas" },
+  { id: "personalizados",label: "Personalizados" },
+];
+
+// Cada produto: id, categoria, nome, descrição, preço (texto), cores (para flores/buquês) e ícone
+const PRODUCTS = [
+  {
+    id:"flor-lirio", cat:"flores", name:"Flor Lírio de Chenille",
+    desc:"Flor artesanal de chenille em formato de lírio, com estames delicados.", price:"a partir de R$ 8",
+    icon:"flower",
+    img:"images/flor-lirio-azul.jpg",
+    colors:[
+      {name:"Azul", hex:"#1B8FBF", imgs:["images/flor-lirio-azul.jpg", "images/flor-lirio-azul-2.jpg", "images/flor-lirio-azul-trio.jpg"]},
+      {name:"Amarelo", hex:"#E8B430", img:"images/flor-lirio-amarelo.jpg"},
+    ]
+  },
+  {
+    id:"flor-cravo", cat:"flores", name:"Flor Cravo de Chenille",
+    desc:"Flor artesanal de chenille com pétalas em camadas, estilo cravo/camélia.", price:"a partir de R$ 8",
+    icon:"flower",
+    img:"images/flor-cravo-rosa.jpg",
+    colors:[
+      {name:"Rosa-choque", hex:"#D6006E", img:"images/flor-cravo-rosa.jpg"},
+      {name:"Vermelho", hex:"#C21818", img:"images/flor-cravo-vermelho.jpg"},
+      {name:"Branco", hex:"#F5F1E8", img:"images/flor-cravo-grupo.jpg"},
+      {name:"Lilás", hex:"#B9A6D9", img:"images/flor-cravo-grupo.jpg"},
+    ]
+  },
+  {
+    id:"flor-miolo-branco", cat:"flores", name:"Flor Marrom com Miolo Branco",
+    desc:"Flor artesanal de chenille em tom marrom/chocolate com miolo branco fofinho.", price:"a partir de R$ 8",
+    icon:"flower",
+    img:"images/flor-miolobranco-marrom-2.jpg",
+    colors:[
+      {name:"Marrom", hex:"#4A2E22", img:"images/flor-miolobranco-marrom-2.jpg"},
+    ]
+  },
+  {
+    id:"flor-estrela", cat:"flores", name:"Flor Estrela de Chenille",
+    desc:"Flor artesanal em formato de estrela, ótima para dar um toque especial ao buquê.", price:"a partir de R$ 8",
+    icon:"star",
+    img:"images/flor-estrela-amarela.jpg",
+    colors:[
+      {name:"Amarelo", hex:"#F0C419", img:"images/flor-estrela-amarela.jpg"},
+    ]
+  },
+  {
+    id:"flor-tulipa", cat:"flores", name:"Flor Tulipa de Chenille",
+    desc:"Flor artesanal de chenille em formato de tulipa fechada.", price:"a partir de R$ 8",
+    icon:"flower",
+    img:"images/flor-tulipa-rosa.jpg",
+    colors:[
+      {name:"Rosa", hex:"#E0499B", img:"images/flor-tulipa-rosa.jpg"},
+      {name:"Azul", hex:"#1B8FBF", img:"images/flor-tulipa-azul.jpg"},
+    ]
+  },
+  {
+    id:"flor-margarida", cat:"flores", name:"Flor Margarida de Chenille",
+    desc:"Flor artesanal de chenille estilo margarida, com miolo amarelo.", price:"a partir de R$ 8",
+    icon:"flower",
+    img:"images/flor-margarida-azul.jpg",
+    colors:[
+      {name:"Azul", hex:"#2E9FD6", img:"images/flor-margarida-azul.jpg"},
+    ]
+  },
+  {
+    id:"flor-girassol", cat:"flores", name:"Flor Girassol de Chenille",
+    desc:"Flor artesanal de chenille em formato de girassol, com miolo marrom texturizado.", price:"a partir de R$ 9",
+    icon:"flower",
+    img:"images/flor-girassol.jpg",
+    colors:[
+      {name:"Amarelo", hex:"#F0C419", img:"images/flor-girassol.jpg"},
+    ]
+  },
+  {
+    id:"buque-tulipas", cat:"buques", name:"Buquê de Tulipas",
+    desc:"Buquê com tulipas artesanais de chenille, embalado com papel e laço.", price:"a partir de R$ 30",
+    icon:"flower", img:"images/buque-tulipas-rosa.jpg", colors:null
+  },
+  {
+    id:"buque-rosas", cat:"buques", name:"Buquê de Rosas",
+    desc:"Buquê de rosas de chenille em tons de azul e lilás, embalado com laço dourado.", price:"a partir de R$ 30",
+    icon:"flower", img:"images/buque-rosas-lilas.jpg", colors:null
+  },
+  {
+    id:"buque-mix", cat:"buques", name:"Buquê Mix Colorido",
+    desc:"Buquê variado com lírios, girassol, tulipas e estrela — várias flores num só arranjo.", price:"a partir de R$ 40",
+    icon:"flower", img:"images/buque-mix-colorido.jpg", colors:null
+  },
+  {
+    id:"buque-natural", cat:"buques", name:"Buquê Natural (sem embalagem)",
+    desc:"Girassol, cravo vermelho e lírio azul — ideal para quem prefere sem papel de embrulho.", price:"a partir de R$ 25",
+    icon:"flower", img:"images/buque-natural-mix.jpg", colors:null
+  },
+  {
+    id:"chav-patinha", cat:"chaveiros", name:"Chaveiro Patinha",
+    desc:"Chaveiro de chenille em formato de patinha.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-patinha.jpg", colors:null
+  },
+  {
+    id:"chav-flor", cat:"chaveiros", name:"Chaveiro Florzinha",
+    desc:"Chaveiro de chenille em formato de flor.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-flor-marrom.jpg", colors:null
+  },
+  {
+    id:"chav-coracao", cat:"chaveiros", name:"Chaveiro Coração",
+    desc:"Chaveiro de chenille em formato de coração.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-coracao.jpg", colors:null
+  },
+  {
+    id:"chav-pirulito", cat:"chaveiros", name:"Chaveiro Docinho",
+    desc:"Chaveiro de chenille em formato de docinho/pirulito, com laço.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-pirulito-trio.jpg", colors:null
+  },
+  {
+    id:"chav-donut", cat:"chaveiros", name:"Chaveiro Donut & Patinho",
+    desc:"Dupla de chaveiros: donut coberto e patinho fofinho.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-donut-patinho.jpg", colors:null
+  },
+  {
+    id:"chav-agua-viva", cat:"chaveiros", name:"Chaveiro Água-viva",
+    desc:"Chaveiro de chenille em formato de água-viva, com tentáculos enrolados.", price:"a partir de R$ 12",
+    icon:"keyring",
+    img:"images/chaveiro-agua-viva.jpg",
+    colors:[
+      {name:"Azul", hex:"#3FA9E0", img:"images/chaveiro-agua-viva.jpg"},
+      {name:"Rosa", hex:"#E0499B", img:"images/chaveiro-agua-viva.jpg"},
+      {name:"Vermelho", hex:"#C21818", img:"images/chaveiro-agua-viva.jpg"},
+    ]
+  },
+  {
+    id:"chav-margarida", cat:"chaveiros", name:"Chaveiro Margarida",
+    desc:"Chaveiro de chenille em formato de margarida.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-margarida.jpg", colors:null
+  },
+  {
+    id:"chav-morango", cat:"chaveiros", name:"Chaveiro Morango",
+    desc:"Chaveiro de chenille em formato de morango, com detalhe brilhante.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-morango.jpg", colors:null
+  },
+  {
+    id:"chav-bola", cat:"chaveiros", name:"Chaveiro Bola",
+    desc:"Chaveiro de chenille em formato de bola.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-bola.jpg", colors:null
+  },
+  {
+    id:"chav-bichinho-redondo", cat:"chaveiros", name:"Chaveiro Bichinho Redondo",
+    desc:"Chaveiro de chenille fofinho e arredondado, com carinha.", price:"a partir de R$ 12",
+    icon:"keyring", img:"images/chaveiro-bichinho-redondo.jpg", colors:null
+  },
+  {
+    id:"cachorro-poodle", cat:"cachorrinhos", name:"Cachorrinho Poodle",
+    desc:"Cachorrinho artesanal de chenille, pode acompanhar um buquê ou ser presente avulso.", price:"a partir de R$ 18",
+    icon:"dog",
+    img:"images/cachorrinho-poodle.jpg",
+    colors:[
+      {name:"Preto", hex:"#2b2b2b", img:"images/cachorrinho-poodle.jpg"},
+      {name:"Cinza", hex:"#9c9186", img:"images/cachorrinho-poodle.jpg"},
+    ]
+  },
+  {
+    id:"presilha-flor", cat:"presilhas", name:"Presilha Flor de Chenille",
+    desc:"Presilha para cabelo com flor de chenille aplicada.", price:"a partir de R$ 7",
+    icon:"clip",
+    img:"images/presilha-flor-amarela.jpg",
+    colors:[
+      {name:"Amarelo", hex:"#F0C419", img:"images/presilha-flor-amarela.jpg"},
+      {name:"Rosa", hex:"#D6006E", img:"images/presilha-flor-rosa.jpg"},
+    ]
+  },
+  {
+    id:"presilha-margarida", cat:"presilhas", name:"Presilha Margarida",
+    desc:"Presilha para cabelo com flor margarida de chenille.", price:"a partir de R$ 7",
+    icon:"clip",
+    img:"images/presilha-margarida-azul.jpg",
+    colors:[
+      {name:"Azul", hex:"#2E9FD6", img:"images/presilha-margarida-azul.jpg"},
+      {name:"Rosa", hex:"#E0499B", img:"images/presilha-margarida-rosa.jpg"},
+    ]
+  },
+  {
+    id:"presilha-laco", cat:"presilhas", name:"Presilha Laço de Chenille",
+    desc:"Presilha em formato de laço, com direito a brilhos e pérolas.", price:"a partir de R$ 8",
+    icon:"clip",
+    img:"images/presilha-laco-rosa.jpg",
+    colors:[
+      {name:"Rosa", hex:"#D6006E", img:"images/presilha-laco-rosa.jpg"},
+      {name:"Azul", hex:"#1B8FBF", img:"images/presilha-laco-azul.jpg"},
+    ]
+  },
+  {
+    id:"custom-estrela", cat:"personalizados", name:"Estrela para buquê",
+    desc:"Igual ao pedido do Gustavo: estrela de chenille aplicada ao buquê.", price:"sob consulta",
+    icon:"star", img:"images/flor-estrela-amarela.jpg", colors:null
+  },
+  {
+    id:"custom-cachorrinhos", cat:"personalizados", name:"Buquê com Cachorrinhos",
+    desc:"Buquê com cachorrinhos de chenille aplicados junto às flores — pedido personalizado.", price:"sob consulta",
+    icon:"dog", img:"images/personalizado-buque-cachorrinhos.jpg", colors:null
+  },
+  {
+    id:"custom-gatinho", cat:"personalizados", name:"Buquê com Gatinho",
+    desc:"Buquê com um gatinho de chenille aplicado junto às flores — pedido personalizado.", price:"sob consulta",
+    icon:"dog", img:"images/personalizado-buque-gatinho.jpg", colors:null
+  },
+  {
+    id:"custom-aquece", cat:"personalizados", name:"Buquê que esquenta (aquece-mão)",
+    desc:"Buquê especial com elemento que aquece — pedido personalizado.", price:"sob consulta",
+    icon:"heart", colors:null
+  },
+];
+
+/* =========================================================
+   ÍCONES SVG (recolorem junto com a cor escolhida)
+========================================================= */
+function svgIcon(type, color){
+  const c = color || "#9c3f61";
+  const icons = {
+    flower: `<svg viewBox="0 0 100 100" fill="none"><g>
+      <circle cx="50" cy="30" r="16" fill="${c}"/>
+      <circle cx="50" cy="70" r="16" fill="${c}"/>
+      <circle cx="30" cy="50" r="16" fill="${c}"/>
+      <circle cx="70" cy="50" r="16" fill="${c}"/>
+      <circle cx="50" cy="50" r="14" fill="#E8B84B"/>
+      </g></svg>`,
+    gem: `<svg viewBox="0 0 100 100" fill="none"><path d="M20 40 L50 10 L80 40 L50 90 Z" fill="${c}"/><path d="M20 40 L80 40 L50 90 Z" fill="${c}" fill-opacity="0.6"/></svg>`,
+    keyring: `<svg viewBox="0 0 100 100" fill="none"><circle cx="35" cy="35" r="18" stroke="${c}" stroke-width="8"/><rect x="48" y="55" width="10" height="35" rx="4" fill="${c}"/><circle cx="53" cy="90" r="10" fill="${c}"/></svg>`,
+    dog: `<svg viewBox="0 0 100 100" fill="none"><ellipse cx="50" cy="60" rx="28" ry="24" fill="${c}"/><ellipse cx="30" cy="35" rx="12" ry="18" fill="${c}"/><ellipse cx="70" cy="35" rx="12" ry="18" fill="${c}"/><circle cx="40" cy="58" r="4" fill="#35283A"/><circle cx="60" cy="58" r="4" fill="#35283A"/></svg>`,
+    clip: `<svg viewBox="0 0 100 100" fill="none"><rect x="20" y="45" width="60" height="12" rx="6" fill="${c}"/><path d="M25 51 L75 51 L60 20 Z" fill="${c}" fill-opacity="0.6"/></svg>`,
+    star: `<svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L61 38 L94 38 L67 57 L77 90 L50 70 L23 90 L33 57 L6 38 L39 38 Z" fill="${c}"/></svg>`,
+    heart: `<svg viewBox="0 0 100 100" fill="none"><path d="M50 88 C10 60 5 30 30 18 C42 12 50 25 50 25 C50 25 58 12 70 18 C95 30 90 60 50 88 Z" fill="${c}"/></svg>`,
+  };
+  return icons[type] || icons.flower;
+}
+
+// Retorna a lista de fotos de uma cor (aceita tanto "imgs" quanto "img" single)
+function getColorImages(product, color){
+  if(color && color.imgs && color.imgs.length) return color.imgs;
+  if(color && color.img) return [color.img];
+  if(product.img) return [product.img];
+  return [];
+}
+
+// Mostra a foto do produto/cor (por índice); se não existir/der erro, usa o ícone desenhado
+function renderMedia(container, product, color, index){
+  const images = getColorImages(product, color);
+  const hex = color ? color.hex : (product.colors ? product.colors[0].hex : null);
+  const imgSrc = images[index] || images[0];
+
+  if(imgSrc){
+    container.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.alt = product.name;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "14px";
+    img.onerror = () => { container.innerHTML = svgIcon(product.icon, hex); };
+    container.appendChild(img);
+  } else {
+    container.innerHTML = svgIcon(product.icon, hex);
+  }
+}
+
+// Desenha as bolinhas "ver outra foto desta cor" — só aparece quando há mais de 1 foto
+function renderPhotoDots(container, product, color, activeIndex, onSelect){
+  const images = getColorImages(product, color);
+  container.innerHTML = "";
+  if(images.length <= 1) return;
+
+  images.forEach((_, idx) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "photo-dot" + (idx === activeIndex ? " active" : "");
+    dot.setAttribute("aria-label", `Ver foto ${idx + 1} desta cor`);
+    dot.addEventListener("click", () => onSelect(idx));
+    container.appendChild(dot);
+  });
+}
+
+/* =========================================================
+   MONTAGEM DA PÁGINA
+========================================================= */
+const tabsEl = document.getElementById("tabs");
+const mainEl = document.getElementById("main");
+const heroPetals = document.getElementById("heroPetals");
+document.getElementById("footerWhats").href = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+["#C1577A","#E8B84B","#9B7FC7","#5C7A52"].forEach(c=>{
+  heroPetals.innerHTML += svgIcon("flower", c);
+});
+
+let activeCat = "todos";
+
+function buildTabs(){
+  const all = [{id:"todos", label:"Todos"}, ...CATEGORIES];
+  tabsEl.innerHTML = all.map(c =>
+    `<button data-cat="${c.id}" class="${c.id==='todos'?'active':''}">${c.label}</button>`
+  ).join("");
+  tabsEl.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      activeCat = btn.dataset.cat;
+      tabsEl.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      renderProducts();
+    });
+  });
+}
+
+function whatsappLink(productName, colorName){
+  const msg = colorName
+    ? `Olá! Gostaria de fazer um pedido: ${productName} — cor ${colorName}.`
+    : `Olá! Gostaria de fazer um pedido: ${productName}.`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+function renderProducts(){
+  mainEl.innerHTML = "";
+
+  // Banner de personalizados sempre visível no topo quando fizer sentido
+  if(activeCat === "todos" || activeCat === "personalizados"){
+    const banner = document.createElement("div");
+    banner.className = "custom-banner";
+    banner.innerHTML = `
+      <div class="txt">
+        <h3>Quer algo só seu?</h3>
+        <p>Estrela no buquê, buquê que esquenta, cachorrinho junto às flores — conte sua ideia e eu faço um orçamento personalizado.</p>
+      </div>
+      <button onclick="window.open('${whatsappLink('Pedido personalizado')}', '_blank')">Falar sobre um personalizado</button>
+    `;
+    mainEl.appendChild(banner);
+  }
+
+  const cats = activeCat === "todos" ? CATEGORIES : CATEGORIES.filter(c=>c.id===activeCat);
+
+  cats.forEach(cat=>{
+    const items = PRODUCTS.filter(p=>p.cat===cat.id);
+    if(items.length === 0) return;
+
+    const section = document.createElement("section");
+    const title = document.createElement("div");
+    title.className = "section-title";
+    title.innerHTML = `<h2>${cat.label}</h2><span>${items.length} modelo${items.length>1?'s':''}</span>`;
+    section.appendChild(title);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    items.forEach(p=>{
+      const card = document.createElement("div");
+      card.className = "card";
+      const initialColor = p.colors ? p.colors[0] : null;
+
+      card.innerHTML = `
+        <div class="icon-wrap" data-icon></div>
+        <div class="photo-dots" data-dots></div>
+        <h3>${p.name}</h3>
+        <div class="desc">${p.desc}</div>
+        <div class="price">${p.price}</div>
+        ${p.colors ? `<div class="swatches" data-swatches></div>` : ``}
+        <button class="order-btn" data-order>
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.3 8.6 3.3 15.5c0 2.6.8 5 2.1 7L3 29l6.7-2.2c1.9 1.1 4.1 1.7 6.3 1.7 7 0 12.7-5.6 12.7-12.5S23 3 16 3zm0 22.7c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1.3 1.3-3.9-.3-.4c-1.2-1.9-1.8-4-1.8-6.2 0-6 5-10.9 11.1-10.9 6.1 0 11.1 4.9 11.1 10.9S22.1 25.7 16 25.7z"/></svg>
+          Fazer pedido
+        </button>
+      `;
+
+      let selectedColorName = initialColor ? initialColor.name : null;
+      let currentPhotoIndex = 0;
+
+      const iconWrap = card.querySelector("[data-icon]");
+      const dotsWrap = card.querySelector("[data-dots]");
+
+      function updateMedia(){
+        renderMedia(iconWrap, p, currentColorObj, currentPhotoIndex);
+        renderPhotoDots(dotsWrap, p, currentColorObj, currentPhotoIndex, (idx)=>{
+          currentPhotoIndex = idx;
+          updateMedia();
+        });
+      }
+
+      let currentColorObj = initialColor;
+      updateMedia();
+
+      if(p.colors){
+        const swatchWrap = card.querySelector("[data-swatches]");
+        p.colors.forEach((c, idx)=>{
+          const dot = document.createElement("div");
+          dot.className = "swatch" + (idx===0 ? " selected" : "");
+          dot.style.background = c.hex;
+          dot.title = c.name;
+          dot.addEventListener("click", ()=>{
+            swatchWrap.querySelectorAll(".swatch").forEach(s=>s.classList.remove("selected"));
+            dot.classList.add("selected");
+            selectedColorName = c.name;
+            currentColorObj = c;
+            currentPhotoIndex = 0;
+            updateMedia();
+          });
+          swatchWrap.appendChild(dot);
+        });
+      }
+
+      card.querySelector("[data-order]").addEventListener("click", ()=>{
+        window.open(whatsappLink(p.name, selectedColorName), "_blank");
+      });
+
+      grid.appendChild(card);
+    });
+
+
+    section.appendChild(grid);
+    mainEl.appendChild(section);
+  });
+}
+
+buildTabs();
+renderProducts();
+</script>
+
+</body>
+</html>
